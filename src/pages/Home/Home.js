@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { getMovies } from 'API';
 import { MoviesList } from 'components/MoviesList/MoviesList';
+
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
 
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
-        const response = await getMovies('/trending/all/day?language=en-US');
+        const response = await getMovies('/trending/all/day');
         setTrendingMovies(response.data.results);
       } catch (error) {
         console.log(error);

@@ -3,6 +3,9 @@ import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovies } from 'API';
 import { StyledMovieWrapper } from './MovieDetails.styled';
 
+const emptyImage =
+  'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
+
 const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
@@ -14,7 +17,7 @@ const MovieDetails = () => {
   useEffect(() => {
     const getMovieDetails = async id => {
       try {
-        const response = await getMovies(`/movie/${id}?language=en-US`);
+        const response = await getMovies(`/movie/${id}`);
         setMovie(response.data);
         setGenres(response.data.genres);
         setMovieVotes(response.data.vote_average);
@@ -37,7 +40,11 @@ const MovieDetails = () => {
     <>
       <StyledMovieWrapper>
         <img
-          src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+          src={
+            poster_path
+              ? `https://image.tmdb.org/t/p/w300${poster_path}`
+              : emptyImage
+          }
           alt={`poster of ${title} movie`}
         ></img>
         <div>

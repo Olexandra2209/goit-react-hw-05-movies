@@ -3,9 +3,13 @@ import { StyledMoviesList } from './MoviesList.styled';
 
 export const MoviesList = ({ movies, title = 'Trending today' }) => {
   const location = useLocation();
+
+  const shouldShowTitle =
+    title === 'Trending today' && location.pathname === '/';
+
   return (
     <div>
-      <h1>{title}</h1>
+      {shouldShowTitle && <h1>{title}</h1>}
       <StyledMoviesList>
         {movies.map(movie => {
           const { id, title } = movie;
