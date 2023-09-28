@@ -6,7 +6,7 @@ import SearchForm from 'components/SearchForm/SearchForm';
 
 const Movies = () => {
   const [moviesByQuery, setMoviesByQuery] = useState([]);
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const query = searchParams.get('searchQuery');
@@ -28,7 +28,7 @@ const Movies = () => {
 
   return (
     <>
-      <SearchForm setSearchParams={searchParams.set} />
+      <SearchForm setSearchParams={setSearchParams} />
       {moviesByQuery.length > 0 && <MoviesList movies={moviesByQuery} />}
     </>
   );
